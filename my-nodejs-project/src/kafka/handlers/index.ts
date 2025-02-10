@@ -2,6 +2,7 @@ import { EachMessagePayload } from "kafkajs";
 import { updateHandler } from "./updateHandler";
 import { actionService } from "@/services";
 import { STATUS } from "@/models/action.model";
+import { TActionKey } from "@/models/action-types.model";
 
 export const actionHandler = async (
   payload: EachMessagePayload,
@@ -20,7 +21,7 @@ export const actionHandler = async (
   produce(actionType, "");
 };
 
-const handlers: Record<string, any> = {
+const handlers: Partial<Record<TActionKey, any>> = {
   upd: updateHandler,
 };
 

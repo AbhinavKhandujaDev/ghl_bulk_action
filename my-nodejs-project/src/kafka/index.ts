@@ -1,6 +1,7 @@
 import { KAFKA_BROKER, KAFKA_RECORDS_TOPIC, ACTION_TOPIC } from "@/config";
 import { ITopicConfig, Kafka } from "kafkajs";
 import handlers, { actionHandler } from "@/kafka/handlers/index";
+import { TActionKey } from "@/models/action-types.model";
 
 const kafka = new Kafka({
   clientId: "my-app",
@@ -50,7 +51,7 @@ export async function setupKafka() {
   await recordsConsumer.run({
     autoCommit: true,
     eachMessage: async (payload) => {
-      const key = payload.message.key?.toString();
+      const key = payload.message.key?.toString() as TActionKey;
       if (!key) throw Error("key not available");
       const handleMessage = handlers[key];
       handleMessage(actionsConsumer);

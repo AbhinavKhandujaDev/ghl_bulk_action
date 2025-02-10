@@ -21,7 +21,7 @@ This project is a Node.js application built with TypeScript, Express, Mongoose, 
 2. Run docker-compose file `npm run docker`.
 3. Manually import `records.json` and `fields.json` files to records and fields collections.
 4. Run `npm run dev`.
-5. Run `POST => action-types` to create multiple action types.
+5. Run `POST => action-types` to create multiple action types (only "upd" action typ will work as there is only one kafka consumer handler i.e. for update function, but other functions can also be added and it will work perfectly fine).
 6. Run `bulk-action` apis.
 
 ## Other
