@@ -4,9 +4,18 @@ This project is a Node.js application built with TypeScript, Express, Mongoose, 
 
 ## Table of Contents
 
+- [Tech Stack](#tech-stack)
 - [Source Files Included](#files-included)
 - [Setup](#setup)
 - [Other](#other)
+
+## Tech Stack
+
+1. Node.js (Typescript)
+2. Redis
+3. Kafka
+4. MongoDB
+5. Docker (`docker-compose.yml` to run Redis, Kafka and MongoDB images)
 
 ## Source Files Included
 
