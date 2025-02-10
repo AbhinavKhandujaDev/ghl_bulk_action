@@ -1,0 +1,31 @@
+{
+  "name": "my-nodejs-project",
+  "version": "1.0.0",
+  "description": "A Node.js project using Express, Mongoose, and Redis.",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "node dist/app.js && cp -r ./public dist/",
+    "dev": "tsc-watch --onSuccess \"npm run tsc-alias\"",
+    "tsc-alias": "tsc-alias -p tsconfig.json && npm start",
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0",
+    "docker": "docker compose -f 'docker-compose.yml' up --build -d"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.5.0",
+    "kafkajs": "^2.2.4",
+    "mongoose": "^8.10.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/redis": "^4.0.11",
+    "tsc-alias": "^1.8.10",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.7.3"
+  }
+}

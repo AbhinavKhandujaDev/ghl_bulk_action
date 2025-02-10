@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "f55c2792-d936-4a22-af50-a8ecf7e33a27",
+		"name": "GHL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39392980"
+	},
+	"item": [
+		{
+			"name": "action-types",
+			"item": [
+				{
+					"name": "get all action types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/action-types",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"action-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create multiple action types",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"title\": \"Add\",\n        \"type\": \"add\"\n    },\n    {\n        \"title\": \"Update\",\n        \"type\": \"upd\"\n    },\n    {\n        \"title\": \"Delete\",\n        \"type\": \"del\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/action-types",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"action-types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "fields",
+			"item": [
+				{
+					"name": "get all fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/fields",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fields"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create multiple fields",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"title\": \"Name\",\n        \"type\": \"text\"\n    },\n    {\n        \"title\": \"Email\",\n        \"type\": \"email\"\n    },\n    {\n        \"title\": \"Status\",\n        \"type\": \"text\"\n    },\n    {\n        \"title\": \"Age\",\n        \"type\": \"num\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/fields",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"fields"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "records",
+			"item": [
+				{
+					"name": "get all records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/records",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create multiple records",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Conrad Vasilyevski\",\n        \"67a492dc2b0584dfcbad530e\": \"cvasilyevski0@cisco.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 14\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Mae Woolaston\",\n        \"67a492dc2b0584dfcbad530e\": \"mwoolaston1@salon.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 15\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Nedi Christofor\",\n        \"67a492dc2b0584dfcbad530e\": \"nchristofor2@booking.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 16\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Holmes Sein\",\n        \"67a492dc2b0584dfcbad530e\": \"hsein3@360.cn\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 17\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Wain McPaik\",\n        \"67a492dc2b0584dfcbad530e\": \"wmcpaik4@usatoday.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 18\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Hestia Freake\",\n        \"67a492dc2b0584dfcbad530e\": \"hfreake5@yelp.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 19\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Dee dee Pinner\",\n        \"67a492dc2b0584dfcbad530e\": \"ddee6@jalbum.net\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 20\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Arin Teare\",\n        \"67a492dc2b0584dfcbad530e\": \"ateare7@prnewswire.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 21\n    },\n    {\n        \"67a492dc2b0584dfcbad530d\": \"Wynne Schiell\",\n        \"67a492dc2b0584dfcbad530e\": \"wschiell8@paypal.com\",\n        \"67a492dc2b0584dfcbad530f\": \"single\",\n        \"67a492dc2b0584dfcbad5310\": 22\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/records",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"records"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "actions",
+			"item": [
+				{
+					"name": "get executed actions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/actions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"actions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "execute bulk action",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"upd\",\n    \"actData\": [\n        [\"67a492dc2b0584dfcbad530f\", \"married\"]\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/bulk-actions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bulk-actions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Age",
+    "type": "num",
+    "_id": { "$oid": "67a492dc2b0584dfcbad5310" }
+  },
+  {
+    "title": "Status",
+    "type": "text",
+    "_id": { "$oid": "67a492dc2b0584dfcbad530f" }
+  },
+  {
+    "title": "Email",
+    "type": "email",
+    "_id": { "$oid": "67a492dc2b0584dfcbad530e" }
+  },
+  {
+    "title": "Name",
+    "type": "text",
+    "_id": { "$oid": "67a492dc2b0584dfcbad530d" }
+  }
+]
