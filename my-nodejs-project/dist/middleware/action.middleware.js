@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateActionAvailable = exports.validateParamsAvailable = exports.validateRateLimit = void 0;
+exports.validateActionAvailable = exports.validateFieldsAvailable = exports.validateParamsAvailable = exports.validateRateLimit = void 0;
 const controllers_1 = __importDefault(require("../controllers"));
 const services_1 = require("../services");
 const redisService_1 = __importDefault(require("../services/redisService"));
@@ -20,8 +20,16 @@ exports.validateParamsAvailable = (0, controllers_1.default)(async (req, _, next
     const { action, actData } = req.body;
     if (!action)
         throw Error("action not found");
-    if (!actData?.length)
+    const fieldIds = Object.keys(actData);
+    if (!fieldIds.length)
         throw Error("actData is missing");
+    req.fieldIds = fieldIds;
+    next();
+});
+exports.validateFieldsAvailable = (0, controllers_1.default)(async (req, _, next) => {
+    const fields = await services_1.fieldService.findMany({ _id: { $in: req.fieldIds } }, { _id: true });
+    if (fields.length !== req.fieldIds?.length)
+        throw Error("One or more than one of the fields not available");
     next();
 });
 exports.validateActionAvailable = (0, controllers_1.default)(async (req, _, next) => {

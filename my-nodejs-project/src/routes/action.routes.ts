@@ -2,6 +2,7 @@ import controller, { sendResponse } from "@/controllers";
 import { produceAction } from "@/kafka";
 import {
   validateActionAvailable,
+  validateFieldsAvailable,
   validateParamsAvailable,
   validateRateLimit,
 } from "@/middleware/action.middleware";
@@ -33,16 +34,17 @@ router.post(
   validateRateLimit,
   validateActionAvailable,
   validateParamsAvailable,
+  validateFieldsAvailable,
   controller(async (req, res) => {
     const { action: actionType, actData } = req.body;
 
     const status = STATUS.QUEUED;
-    const data = await service.create({ actionType, actData, status });
+    const action = await service.create({ actionType, actData, status });
 
-    produceAction(data._id.toString());
+    produceAction(action._id.toString());
 
     return sendResponse(res, true, {
-      data,
+      data: action,
       message: "Action queued",
     });
   })

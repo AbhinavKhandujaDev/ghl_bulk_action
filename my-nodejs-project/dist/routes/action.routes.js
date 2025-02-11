@@ -49,13 +49,13 @@ router.get("/:id", (0, controllers_1.default)(async (req, res) => {
     const data = await services_1.actionService.findById(id);
     return (0, controllers_1.sendResponse)(res, true, { data });
 }));
-router.post("", action_middleware_1.validateRateLimit, action_middleware_1.validateActionAvailable, action_middleware_1.validateParamsAvailable, (0, controllers_1.default)(async (req, res) => {
+router.post("", action_middleware_1.validateRateLimit, action_middleware_1.validateActionAvailable, action_middleware_1.validateParamsAvailable, action_middleware_1.validateFieldsAvailable, (0, controllers_1.default)(async (req, res) => {
     const { action: actionType, actData } = req.body;
     const status = action_model_1.STATUS.QUEUED;
-    const data = await services_1.actionService.create({ actionType, actData, status });
-    (0, kafka_1.produceAction)(data._id.toString());
+    const action = await services_1.actionService.create({ actionType, actData, status });
+    (0, kafka_1.produceAction)(action._id.toString());
     return (0, controllers_1.sendResponse)(res, true, {
-        data,
+        data: action,
         message: "Action queued",
     });
 }));

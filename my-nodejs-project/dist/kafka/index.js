@@ -38,6 +38,8 @@ exports.setupKafka = setupKafka;
 const config_1 = require("../config");
 const kafkajs_1 = require("kafkajs");
 const index_1 = __importStar(require("../kafka/handlers/index"));
+const services_1 = require("../services");
+const action_model_1 = require("../models/action.model");
 const kafka = new kafkajs_1.Kafka({
     clientId: "my-app",
     brokers: [config_1.KAFKA_BROKER],
@@ -82,7 +84,10 @@ async function setupKafka() {
             if (!key)
                 throw Error("key not available");
             const handleMessage = index_1.default[key];
-            handleMessage(actionsConsumer);
+            handleMessage(actionsConsumer, payload).catch(async () => {
+                await services_1.actionService.markRunningActionStatus(action_model_1.STATUS.FAILED);
+                actionsConsumer.resume([topics[1]]);
+            });
         },
     });
     await actionsConsumer.run({

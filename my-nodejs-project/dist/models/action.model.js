@@ -50,17 +50,14 @@ const actionSchema = new mongoose_1.default.Schema({
         required: true,
     },
     actData: {
-        type: [[String, mongoose_1.default.Schema.Types.Mixed]],
+        type: Map,
+        of: mongoose_1.default.Schema.Types.Mixed,
         required: true,
     },
     status: {
         type: String,
         enum: actionStatus,
         default: exports.STATUS.QUEUED,
-    },
-    completed: {
-        type: mongoose_1.Schema.Types.Boolean,
-        default: 0,
     },
     succeeded: {
         type: mongoose_1.Schema.Types.Number,

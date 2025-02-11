@@ -45,12 +45,4 @@ const controller: TController = (asyncfunc) => (req, res, next) => {
   ) as any;
 };
 
-// const controller = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<Response> => {
-//   return sendResponse(res);
-// };
-
 export default controller;

@@ -8,7 +8,7 @@ import {
   recordService,
 } from "@/services";
 import redisService from "@/services/redisService";
-import { Consumer } from "kafkajs";
+import { Consumer, EachMessagePayload } from "kafkajs";
 import { Types } from "mongoose";
 
 const getEmailFieldId = async () => {
@@ -42,11 +42,17 @@ const wait = async (delay = 600) => {
   });
 };
 
-export const updateHandler = async (actionConsumer: Consumer) => {
-  // await wait();
-  const { actionId = "", skip = 0 } = await actionService.getRunningAction();
+export const updateHandler = async (
+  actionConsumer: Consumer,
+  payload: EachMessagePayload
+) => {
+  await wait(1000);
+  const { value } = payload.message;
+  const data = JSON.parse(value?.toString() || "");
 
-  if (!actionId) return;
+  const { actionId = "", skip = 0 } = data;
+
+  if (!actionId) throw Error("Action id not found");
   const limit = 30;
   const records = await recordService.findMany({}, { _id: true }, skip, limit);
 
@@ -59,13 +65,8 @@ export const updateHandler = async (actionConsumer: Consumer) => {
   const action = await actionService.findById(actionId);
   if (!action) return;
   const { actData, succeeded = 0, failed = 0 } = action;
+  const updateObject = Object.fromEntries(actData as any);
   console.log({ skip });
-
-  const updateObject = actData.reduce((acc: any, curr: [string, any]) => {
-    const [fieldId, value] = curr;
-    acc[fieldId] = value;
-    return acc;
-  }, {});
 
   // const emailFieldId = await getEmailFieldId();
   // const skipped = [];
@@ -84,7 +85,7 @@ export const updateHandler = async (actionConsumer: Consumer) => {
 
   const recIds = records.map(({ _id }) => _id);
   await recordService
-    .updateMany({ _id: { $in: recIds } }, updateObject)
+    .updateMany({ _id: { $in: recIds } }, { ...updateObject })
     .then(() => {
       log(recIds, actionId, skip, true);
       actionService.findByIdAndUpdate(actionId, {
@@ -92,7 +93,9 @@ export const updateHandler = async (actionConsumer: Consumer) => {
         // skipped: skipped.length,
       });
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log({ e });
+
       log(recIds, actionId, skip, false);
       actionService.findByIdAndUpdate(actionId, {
         failed: failed + limit,
@@ -100,12 +103,9 @@ export const updateHandler = async (actionConsumer: Consumer) => {
       });
     });
 
-  await actionService.runNextBatch(limit).catch(async (e) => {
-    console.log("Unable to run batch ===>", e);
-    log(recIds, actionId, skip, false).catch();
-    actionService
-      .findByIdAndUpdate(actionId, { failed: failed + limit })
-      .catch();
-    actionService.markRunningActionStatus(STATUS.FAILED).catch();
+  await actionService.runNextBatch(limit).catch(async () => {
+    log(recIds, actionId, skip, false);
+    actionService.findByIdAndUpdate(actionId, { failed: failed + limit });
+    actionService.markRunningActionStatus(STATUS.FAILED);
   });
 };

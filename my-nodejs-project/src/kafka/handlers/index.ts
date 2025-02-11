@@ -17,8 +17,8 @@ export const actionHandler = async (
   if (!action) return;
 
   const { actionType } = action || {};
-  await actionService.setRunningAction(actionId);
-  produce(actionType, "");
+  const data = await actionService.setRunningAction(actionId);
+  produce(actionType, data);
 };
 
 const handlers: Partial<Record<TActionKey, any>> = {

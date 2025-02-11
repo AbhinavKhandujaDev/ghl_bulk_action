@@ -15,10 +15,8 @@ export type TAction = {
   id?: string;
   actionType: TActionKey;
 
-  actData: [string, any];
+  actData: Record<string, any>;
   status: TStatus;
-
-  completed?: boolean;
 
   succeeded?: number;
   failed?: number;
@@ -35,17 +33,14 @@ const actionSchema = new mongoose.Schema(
       required: true,
     },
     actData: {
-      type: [[String, mongoose.Schema.Types.Mixed]],
+      type: Map,
+      of: mongoose.Schema.Types.Mixed,
       required: true,
     },
     status: {
       type: String,
       enum: actionStatus,
       default: STATUS.QUEUED,
-    },
-    completed: {
-      type: Schema.Types.Boolean,
-      default: 0,
     },
     succeeded: {
       type: Schema.Types.Number,

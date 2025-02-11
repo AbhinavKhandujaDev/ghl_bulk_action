@@ -15,8 +15,8 @@ const actionHandler = async (payload, produce) => {
     if (!action)
         return;
     const { actionType } = action || {};
-    await services_1.actionService.setRunningAction(actionId);
-    produce(actionType, "");
+    const data = await services_1.actionService.setRunningAction(actionId);
+    produce(actionType, data);
 };
 exports.actionHandler = actionHandler;
 const handlers = {

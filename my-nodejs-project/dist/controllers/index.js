@@ -16,12 +16,5 @@ exports.sendResponse = sendResponse;
 const controller = (asyncfunc) => (req, res, next) => {
     return asyncfunc(req, res, next).catch((e) => (0, exports.sendResponse)(res, false, { message: e.message }));
 };
-// const controller = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<Response> => {
-//   return sendResponse(res);
-// };
 exports.default = controller;
 //# sourceMappingURL=index.js.map

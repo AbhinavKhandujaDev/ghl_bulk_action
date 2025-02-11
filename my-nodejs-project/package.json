@@ -9,7 +9,7 @@
     "tsc-alias": "tsc-alias -p tsconfig.json && npm start",
     "build": "tsc",
     "test": "echo \"No tests specified\" && exit 0",
-    "docker": "docker compose -f 'docker-compose.yml' up --build -d"
+    "dev:docker": "docker compose -f 'docker-compose.yml' up --build -d && npm run dev"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
